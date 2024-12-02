@@ -1,14 +1,16 @@
 import client from "@/client/client";
+import { getAllBlogs } from "@/queries/getAllBlogs";
 import { getHeading } from "@/queries/getHeading";
 import React from "react";
 
 export const revalidate = 10;
 
-const Blogs = async () => {
+const Page = async () => {
   const { data, error, loading } = await client.query({
-    query: getHeading,
+    query: getAllBlogs,
     fetchPolicy: "no-cache",
   });
+  console.log('data', data)
   //   useEffect(() => {
   //     const fetchData = async () => {
   //       try {
@@ -42,9 +44,22 @@ const Blogs = async () => {
 
   return (
     <main className="container">
-      <h1 className="text-6xl font-bold text-center">{data?.heading?.Title}</h1>
+      <h1 className="text-6xl font-bold text-center my-12">
+        {/* {data?.heading?.Title} */}
+      </h1>
+      <div className="w-2/3 mx-auto rounded-lg bg-purple-300 aspect-[5/2]"></div>
     </main>
   );
 };
 
-export default Blogs;
+export default Page;
+
+// export const generateStaticParams = async () => {
+//   const { data } = await client.query({ query: getAllBlogs });
+//   const blogs = data?.blogs.map((blog) => ({
+//     slug: blog.slug,
+//   }));
+//   return {
+//     params: blogs,
+//   };
+// };

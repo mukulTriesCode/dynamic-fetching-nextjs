@@ -5,12 +5,20 @@ const Navbar = () => {
   return (
     <div className="bg-slate-200">
       <div className="container flex justify-between py-5 px-2 text-xl">
-        <div className="">Logo</div>
+        <div className="">
+          <Link href={"/"}>Logo</Link>
+        </div>
         <div className="">
           <ul className="flex gap-8">
-            <li className="w-fit hover:underline"><Link href="/about">About</Link></li>
-            <li className="w-fit hover:underline"><Link href="/blogs">Blogs</Link></li>
-            <li className="w-fit hover:underline"><Link href="/contact">Contact Us</Link></li>
+            <li className="w-fit hover:underline">
+              <Link href="/about">About</Link>
+            </li>
+            <li className="w-fit hover:underline">
+              <Link href="/blogs">Blogs</Link>
+            </li>
+            <li className="w-fit hover:underline">
+              <Link href="/contact">Contact Us</Link>
+            </li>
           </ul>
         </div>
       </div>
