@@ -1,44 +1,45 @@
-"use client";
-// import client from "@/client/client";
-// import { GET_HEADING } from "@/queries/getHeading";
-// import { useQuery } from "@apollo/client";
-import React, { useEffect, useState } from "react";
+import client from "@/client/client";
+import { getHeading } from "@/queries/getHeading";
+import React from "react";
 
-const Blogs = () => {
-  //   const { data, error, loading } = client.query(GET_HEADING);
-  const [data, setData] = useState(null);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:1337/graphql", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            query: `
-                query Heading {
-                  heading {
-                    Title
-                  }
-                }
-                `,
-          }),
-          //   next: { revalidate: 10 },
-        });
-        const blogs = await response.json();
-        setData(blogs?.data);
-      } catch (error) {
-        console.error("Error fetching blogs", error);
-      }
-    };
-    fetchData();
-  }, []);
+export const revalidate = 10;
 
-  //   if (loading) return <div>Loading...</div>;
-  //   if (error) return <div>Error: {error.message}</div>;
+const Blogs = async () => {
+  const { data, error, loading } = await client.query({
+    query: getHeading,
+    fetchPolicy: "no-cache",
+  });
+  //   useEffect(() => {
+  //     const fetchData = async () => {
+  //       try {
+  //         const response = await fetch("http://localhost:1337/graphql", {
+  //           method: "POST",
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //           },
+  //           body: JSON.stringify({
+  //             query: `
+  //                 query Heading {
+  //                   heading {
+  //                     Title
+  //                   }
+  //                 }
+  //                 `,
+  //           }),
+  //           //   next: { revalidate: 10 },
+  //         });
+  //         const blogs = await response.json();
+  //         setData(blogs?.data);
+  //       } catch (error) {
+  //         console.error("Error fetching blogs", error);
+  //       }
+  //     };
+  //     fetchData();
+  //   }, []);
 
-  //   console.log("data", data);
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
   return (
     <main className="container">
       <h1 className="text-6xl font-bold text-center">{data?.heading?.Title}</h1>
