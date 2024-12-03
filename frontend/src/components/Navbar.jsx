@@ -3,7 +3,7 @@ import React from "react";
 
 const Navbar = () => {
   return (
-    <div className="bg-slate-200">
+    <div className="bg-slate-200 sticky top-0">
       <div className="container flex justify-between py-5 px-2 text-xl">
         <div className="">
           <Link href={"/"}>Logo</Link>
