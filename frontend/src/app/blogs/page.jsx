@@ -41,7 +41,8 @@ const Page = async () => {
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
-
+  // console.log("data", data?.blogs[0]?.blog_description[0].children[0]);
+  // console.log("data", data?.blogs[1]?.blog_description[0].children[0]);
   return (
     <main className="container">
       <h1 className="text-6xl font-bold text-center my-12">Blogs</h1>

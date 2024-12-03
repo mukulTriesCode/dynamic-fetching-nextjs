@@ -4,9 +4,13 @@ import { getAllBlogs } from "@/queries/getAllBlogs";
 import { getSingleBlog } from "@/queries/getSingleBlog";
 import { redirect } from "next/navigation";
 import React from "react";
+export const revalidate = 60;
 
 const page = async ({ params }) => {
-  const allBlogs = await client.query({ query: getAllBlogs });
+  const allBlogs = await client.query({
+    query: getAllBlogs,
+    fetchPolicy: "no-cache",
+  });
   const singleBlog = allBlogs.data.blogs.find(
     (blog) => blog.slug === params.slug
   );
@@ -18,9 +22,8 @@ const page = async ({ params }) => {
     variables: {
       documentId: singleBlog.documentId,
     },
+    fetchPolicy: "no-cache",
   });
-  //   const blogData = data?.filter((blog) => blog.slug === params.slug)[0];
-
   const blog = data?.blog;
   return (
     <div className="container">
@@ -35,7 +38,7 @@ const page = async ({ params }) => {
 export default page;
 
 export const generateStaticParams = async () => {
-  const { data } = await client.query({ query: getAllBlogs });
+  const { data } = await client.query({ query: getAllBlogs, fetchPolicy: "no-cache" });
 
   return data?.blogs.map((blog) => ({
     slug: blog.slug,
