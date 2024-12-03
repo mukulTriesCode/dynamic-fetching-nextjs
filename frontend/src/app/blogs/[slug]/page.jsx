@@ -11,8 +11,9 @@ const page = async ({ params }) => {
     query: getAllBlogs,
     fetchPolicy: "no-cache",
   });
+  const { slug } = await params;
   const singleBlog = allBlogs.data.blogs.find(
-    (blog) => blog.slug === params.slug
+    (blog) => blog.slug === slug
   );
   if (!singleBlog) {
     redirect("/404");
@@ -38,7 +39,10 @@ const page = async ({ params }) => {
 export default page;
 
 export const generateStaticParams = async () => {
-  const { data } = await client.query({ query: getAllBlogs, fetchPolicy: "no-cache" });
+  const { data } = await client.query({
+    query: getAllBlogs,
+    fetchPolicy: "no-cache",
+  });
 
   return data?.blogs.map((blog) => ({
     slug: blog.slug,
