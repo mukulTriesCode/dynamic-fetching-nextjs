@@ -46,8 +46,7 @@ const Page = async () => {
   return (
     <main className="container">
       <h1 className="text-6xl font-bold text-center my-12">Blogs</h1>
-      <div className="flex">
-
+      <div className="flex gap-5">
       {data?.blogs.map((blog) => (
         <Link
         key={blog.documentId}
