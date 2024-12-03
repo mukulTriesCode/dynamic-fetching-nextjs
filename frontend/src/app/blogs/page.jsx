@@ -1,6 +1,7 @@
 import client from "@/client/client";
 import { getAllBlogs } from "@/queries/getAllBlogs";
 import { getHeading } from "@/queries/getHeading";
+import Link from "next/link";
 import React from "react";
 
 export const revalidate = 10;
@@ -10,7 +11,7 @@ const Page = async () => {
     query: getAllBlogs,
     fetchPolicy: "no-cache",
   });
-  console.log('data', data)
+  console.log("data", data);
   //   useEffect(() => {
   //     const fetchData = async () => {
   //       try {
@@ -44,22 +45,23 @@ const Page = async () => {
 
   return (
     <main className="container">
-      <h1 className="text-6xl font-bold text-center my-12">
-        {/* {data?.heading?.Title} */}
-      </h1>
-      <div className="w-2/3 mx-auto rounded-lg bg-purple-300 aspect-[5/2]"></div>
+      <h1 className="text-6xl font-bold text-center my-12">Blogs</h1>
+      <div className="flex">
+
+      {data?.blogs.map((blog) => (
+        <Link
+        key={blog.documentId}
+        href={`/blogs/${blog?.slug}`}
+        className="rounded-lg aspect-[3/5] max-w-[200px] w-full bg-purple-300"
+        >
+          <div className="grid h-full place-items-center">
+            <h2>{blog?.blog_title}</h2>
+          </div>
+        </Link>
+      ))}
+      </div>
     </main>
   );
 };
 
 export default Page;
-
-// export const generateStaticParams = async () => {
-//   const { data } = await client.query({ query: getAllBlogs });
-//   const blogs = data?.blogs.map((blog) => ({
-//     slug: blog.slug,
-//   }));
-//   return {
-//     params: blogs,
-//   };
-// };
