@@ -7,7 +7,6 @@ const Heading = () => {
   const { data, loading, error } = useQuery(getHeading);
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error :(</div>;
-  console.log("data", data);
   return <div>{data.heading.Title}</div>;
 };
 
