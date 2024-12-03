@@ -5,6 +5,11 @@ export const getAllBlogs = gql`
     blogs {
       documentId
       blog_title
+      blog_description
+      blog_image {
+        url
+        alternativeText
+      }
       slug
     }
   }
