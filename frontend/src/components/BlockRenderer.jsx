@@ -9,11 +9,8 @@ export default function BlockRenderer({ content }) {
       content={content}
       blocks={{
         paragraph: ({ children }) => (
-          <p className="[&_code]:bg-slate-100 [&_code]:rounded [&_code]:border-slate-300 [&_code]:border [&_code]:px-2">{children}</p>
+          <p className="">{children}</p>
         ),
-        heading: ({ children }) => <h1>{children}</h1>,
-        "heading-two": ({ children }) => <h2>{children}</h2>,
-        "heading-three": ({ children }) => <h3>{children}</h3>,
         link: ({ children, url }) => (
           <Link className="text-red-400 hover:underline" href={url}>
             {children}
